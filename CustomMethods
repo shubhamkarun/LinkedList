@@ -1,0 +1,98 @@
+public class Node {
+    int data;
+    Node ref;
+}
+public class Runner {
+
+    public static void main(String[] args) {
+
+        LinkedList List = new LinkedList();
+
+        List.insert(20);
+        List.insert(98);
+        List.insert(63);
+        List.insert(82);
+        List.insertAt(0, 69);
+        List.remove(2);
+
+        List.show();
+    }
+}
+public class LinkedList {
+    Node head;
+
+    public void insert(int data)
+    {
+        Node node = new Node();
+        node.data = data;
+        node.ref = null;
+
+        if(head == null)
+        {
+            head = node;
+        }
+        else
+        {
+            Node n = head;
+            while(n.ref!=null)
+            {
+                n = n.ref;
+            }
+            n.ref = node;
+        }
+    }
+
+    public void insertAt(int index, int data)
+    {
+        Node node = new Node();
+        node.data = data;
+        node.ref = null;
+
+        if(index==0)
+        {
+            node.ref = head;
+            head = node;
+        }
+
+        Node n = head;
+        for(int i=0; i<index-1; i++)
+        {
+            n = n.ref;
+        }
+        Node tmp = n.ref;
+        n.ref = node;
+        node.ref = tmp;
+    }
+
+    public void remove(int index)
+    {
+        Node n = head;
+        if(index==0)
+        {
+            head = head.ref;
+//            n = n.ref;
+//            head = n;
+        }
+        else
+        {
+            for(int i=0; i<index-1; i++)
+            {
+                n = n.ref;
+            }
+            Node tmp = n.ref;
+            n.ref = tmp.ref;
+            tmp = null;
+        }
+    }
+
+    public void show()
+    {
+        Node n = head;
+        while(n.ref!=null)
+        {
+            System.out.println(n.data);
+            n = n.ref;
+        }
+        System.out.println(n.data);
+    }
+}
